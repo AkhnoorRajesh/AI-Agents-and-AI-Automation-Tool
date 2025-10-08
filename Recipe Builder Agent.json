@@ -1,0 +1,231 @@
+{
+  "name": "Recipe Builder Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "877019fa-6b46-460f-a14d-490091157fb5",
+      "name": "When chat message received",
+      "webhookId": "8ab92188-53b3-4e58-88e9-474c25740c83"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        208,
+        208
+      ],
+      "id": "5378eb52-97c3-4258-bdf5-7c1206b05180",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "bvDHKvcpG7gVUGiC",
+          "name": "OpenRouter account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"recipe_name\": \"Poha with Potatoes\",\n  \"servings\": 2,\n  \"category\": \"Breakfast\",\n  \"cuisine\": \"Indian\",\n  \n  \"Ingredients\": \"• 1 cup flattened rice (poha)\\n• 1 medium potato, peeled and diced\\n• 1 medium onion, finely chopped\\n• 1 green chili, chopped (optional)\\n• 1/2 teaspoon mustard seeds\\n• 1/2 teaspoon cumin seeds\\n• 8-10 curry leaves\\n• 1/4 teaspoon turmeric powder\\n• 1/2 teaspoon sugar\\n• Salt to taste\\n• 2 tablespoons oil\\n• 1 tablespoon freshly squeezed lemon juice\\n• 2 tablespoons roasted peanuts (optional)\\n• Fresh coriander leaves, chopped (for garnish)\",\n  \n  \"Instructions\": \"1️⃣ Rinse the Poha: Place the poha in a colander and rinse under running water gently for 2–3 seconds till softened. Do not soak. Let it drain completely and keep aside.\\n\\n2️⃣ Prepare the Potatoes: Heat 1 tablespoon oil in a pan over medium flame. Add diced potatoes and a pinch of salt. Cover and cook until potatoes are tender and slightly golden. Remove and keep aside.\\n\\n3️⃣ Tempering: In the same pan, add remaining oil. Add mustard seeds and cumin seeds. Let them splutter. Add curry leaves, chopped green chili, and chopped onions. Sauté till onions turn translucent.\\n\\n4️⃣ Cook the Mixture: Add turmeric powder and stir well. Add the cooked potatoes back into the pan and mix. Add rinsed poha, salt, and sugar. Mix gently to combine, ensuring poha is evenly coated with turmeric and salt. Cook on low flame for 2–3 minutes, stirring occasionally.\\n\\n5️⃣ Finishing Touches: Turn off the heat. Add lemon juice and roasted peanuts (if using). Mix gently. Garnish with fresh coriander leaves.\\n\\n6️⃣ Serve: Serve hot with a side of yogurt or a cup of tea.\",\n  \n  \"Tips\": \"✅ Adjust green chili based on your spice preference.\\n✅ Add grated coconut on top for extra flavor.\\n✅ For a twist, add some chopped tomatoes or peas with the onions.\",\n  \n  \"notes\": \"Enjoy your delicious homemade Poha with Potatoes!\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        352,
+        208
+      ],
+      "id": "cdc01909-264b-428e-9755-f9e0b7eaea25",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "<Agent_Instruction>\n<Role>\n<name>Recipe Generator Agent</name>\n<description>A helpful cooking assistant that generates custom recipes</description>\n</Role>\n<Goal>\n<primary>Provide a complete recipe including ingredients and step by step instruction based on the user's requested dish.</primary>\n<Instructions>\n<instruction>Once you receive the user's dish name note them down carefully</instruction>\n<instruction>Generate a list of ingredients with accurate quantities tailored to the specified serving size.</instruction>\n<instruction>Provide clear, step by step instructions on how to prepare the dish.</instruction>\n<instruction>Where applicable , include cooking times, tips, or variations to enhance the recipe.</instruction>\n</Instructions>\n</Agent_Instructions>\n<Examples>\n<example>\n<User_Input>poha with potato</User_Input>\n<User_Output>\n{\n  \"recipe_name\": \"Poha with Potatoes\",\n  \"servings\": 2,\n  \"category\": \"Breakfast\",\n  \"cuisine\": \"Indian\",\n  \n  \"Ingredients\": \"• 1 cup flattened rice (poha)\\n• 1 medium potato, peeled and diced\\n• 1 medium onion, finely chopped\\n• 1 green chili, chopped (optional)\\n• 1/2 teaspoon mustard seeds\\n• 1/2 teaspoon cumin seeds\\n• 8-10 curry leaves\\n• 1/4 teaspoon turmeric powder\\n• 1/2 teaspoon sugar\\n• Salt to taste\\n• 2 tablespoons oil\\n• 1 tablespoon freshly squeezed lemon juice\\n• 2 tablespoons roasted peanuts (optional)\\n• Fresh coriander leaves, chopped (for garnish)\",\n  \n  \"Instructions\": \"1️⃣ Rinse the Poha: Place the poha in a colander and rinse under running water gently for 2–3 seconds till softened. Do not soak. Let it drain completely and keep aside.\\n\\n2️⃣ Prepare the Potatoes: Heat 1 tablespoon oil in a pan over medium flame. Add diced potatoes and a pinch of salt. Cover and cook until potatoes are tender and slightly golden. Remove and keep aside.\\n\\n3️⃣ Tempering: In the same pan, add remaining oil. Add mustard seeds and cumin seeds. Let them splutter. Add curry leaves, chopped green chili, and chopped onions. Sauté till onions turn translucent.\\n\\n4️⃣ Cook the Mixture: Add turmeric powder and stir well. Add the cooked potatoes back into the pan and mix. Add rinsed poha, salt, and sugar. Mix gently to combine, ensuring poha is evenly coated with turmeric and salt. Cook on low flame for 2–3 minutes, stirring occasionally.\\n\\n5️⃣ Finishing Touches: Turn off the heat. Add lemon juice and roasted peanuts (if using). Mix gently. Garnish with fresh coriander leaves.\\n\\n6️⃣ Serve: Serve hot with a side of yogurt or a cup of tea.\",\n  \n  \"Tips\": \"✅ Adjust green chili based on your spice preference.\\n✅ Add grated coconut on top for extra flavor.\\n✅ For a twist, add some chopped tomatoes or peas with the onions.\",\n  \n  \"notes\": \"Enjoy your delicious homemade Poha with Potatoes!\"\n}\n\n</User_Output>\n</example>\n</Examples>"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "28e3f04b-a327-4496-aa0b-7a4366a0a1db",
+      "name": "Recipe Agent"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appBMQRtMGbPV186P",
+          "mode": "list",
+          "cachedResultName": "Recipe Dashboard",
+          "cachedResultUrl": "https://airtable.com/appBMQRtMGbPV186P"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblo74zL2Us51sXVg",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/appBMQRtMGbPV186P/tblo74zL2Us51sXVg"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Recipe Name": "={{ $json.output.recipe_name }}",
+            "category": "={{ $json.output.category }}",
+            "Ingredients": "={{ $json.output.Ingredients }}",
+            "Instructions": "={{ $json.output.Instructions }}",
+            "Tips": "={{ $json.output.Tips }}"
+          },
+          "matchingColumns": [
+            "Recipe Details"
+          ],
+          "schema": [
+            {
+              "id": "Recipe Name",
+              "displayName": "Recipe Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Ingredients",
+              "displayName": "Ingredients",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Instructions",
+              "displayName": "Instructions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tips",
+              "displayName": "Tips",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        560,
+        0
+      ],
+      "id": "9409c1e9-2498-4acc-ba62-2c4db36ccd74",
+      "name": "recorded in the table",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "fo9QYJgl07UtcOlL",
+          "name": "Airtable Personal Access Token account 5"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Recipe Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Recipe Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Recipe Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recipe Agent": {
+      "main": [
+        [
+          {
+            "node": "recorded in the table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "212506ba-5151-4ec9-aedc-20fe66c9fe2d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6b9778435c9617f84a868e79f9c6c308d7f539ce67111fcfdec43f437209524e"
+  },
+  "id": "M5CkQq9gnCyGbTEW",
+  "tags": []
+}
